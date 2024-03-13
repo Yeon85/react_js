@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lg.mams.test.mapper.TestMapper">
+
+
+	<select id="selectList" parameterType="Map" resultType="Map" >
+
+		/* test selectList */
+		SELECT USERID
+             , USERNAME
+             , LANG
+		FROM   ${schema}.WUSER
+		ORDER BY USERID
+		
+	</select>
+	
+	<select id="selectList_2" parameterType="Map" resultType="Map" >
+
+		/* test selectList_2 */
+		SELECT FORMID
+             , FORMNM
+             , FORMFILE
+             , FORMPATH
+             , ORDSEQ
+             , YNUSE
+             , SYSGBN
+             , CRTTRA
+             , CRTDTE
+             , UPDTRA
+             , UPDDTE
+		FROM   ${schema}.WFORM
+		ORDER BY FORMID
+		
+	</select>
+	
+	<select id="selectDuplCheckCnt" parameterType="Map" resultType="int" >
+
+		/* test selectList */
+		
+		SELECT COUNT(*) AS CNT
+		FROM   ${schema}.WFORM
+		WHERE FORMID = #{formid}
+		
+	</select>
+	
+	<insert id="insert" parameterType="Map">
+
+		/* test insert */
+		
+		INSERT INTO ${schema}.WFORM (
+			  FORMID
+			, FORMNM
+			, FORMFILE
+			, FORMPATH
+			, ORDSEQ
+			, YNUSE
+			, SYSGBN
+			, CRTTRA
+			, CRTDTE
+			, UPDTRA
+			, UPDDTE
+		) VALUES (
+			  #{formid}
+			, #{formnm}
+			, #{formfile}
+			, #{formpath}
+			, #{ordseq}
+			, #{ynuse}
+			, #{sysgbn}
+			, #{crttra}
+			, CURRENT TIMESTAMP 
+			, #{updtra}
+			, CURRENT TIMESTAMP 
+		)
+		
+	</insert>
+	
+	<update id="update" parameterType="Map">
+
+		/* test update */
+		UPDATE ${schema}.WFORM
+		SET   FORMNM	= #{formnm}
+			, FORMFILE  = #{formfile}
+			, FORMPATH  = #{formpath}
+			, ORDSEQ    = #{ordseq}
+			, YNUSE     = #{ynuse}
+			, SYSGBN    = #{sysgbn}
+			, UPDTRA    = #{updtra}
+			, UPDDTE    = CURRENT TIMESTAMP 
+		WHERE FORMID = #{formid}
+		
+	</update>
+	
+	<delete id="delete" parameterType="Map">
+
+		/* test delete */
+		DELETE FROM ${schema}.WFORM WHERE FORMID = #{formid}
+		
+	</delete>
+	
+</mapper>
